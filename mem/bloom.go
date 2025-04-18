@@ -79,3 +79,10 @@ func (b *Bloom) Exists(data []byte) bool {
 	}
 	return true
 }
+
+// 直接分配新内存可能造成GC压力
+func (b *Bloom) Clear() {
+	for i := range b.bitset {
+		b.bitset[i] = 0
+	}
+}
